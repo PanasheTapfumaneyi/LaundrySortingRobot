@@ -1,6 +1,6 @@
 # DOFBOT Control and Camera Feed
 
-This project is a GUI application to sort laundry items based on their color/material using a Dofbot Robitic Arm, integrated with a live camera feed for detecting and sorting objects using Roboflow's machine learning inference API. The application includes functionality for object detection, robotic arm movement, and sorting items into predefined bins.
+This project is a GUI application to sort laundry items based on their color/material using a Dofbot Robitic Arm, integrated with a live camera feed for detecting and sorting objects using Roboflow's machine learning inference API. The application includes functionality for object detection, robotic arm movement, and sorting items into bins.
 
 ## Requirements
 
@@ -27,7 +27,7 @@ This project is a GUI application to sort laundry items based on their color/mat
    ```
 
 3. **Setup Roboflow API**
-   Ensure you have a Roboflow API key. The script already includes a personal API key (`J2QdQ1rY8IvewifiImgk`).
+   Ensure you have a Roboflow API key. The script includes a personal API key (`J2QdQ1rY8IvewifiImgk`).
 
 ## Usage
 
@@ -40,7 +40,7 @@ This project is a GUI application to sort laundry items based on their color/mat
    - Before running the script, kill any existing arm control processes using the commands found in the official DOFBOT documentation.
    - Run the script using Python:
      ```bash
-     python LaundrySortingDofbot(Clothes).py
+     python LaundrySortingClothes.py
      ```
 
 3. **User Interface Features**
@@ -57,6 +57,12 @@ This project is a GUI application to sort laundry items based on their color/mat
    - `p_red_bin`: Red bin position.
    - `p_white_bin`: White bin position.
    - `p_wool_bin`: Wool bin position.
+
+5. **Calibrating arm Positions**
+   - Run calibrateArm.py to easily move arm around and test the servo angles
+
+5. **Code for more accuracy**
+   - For more acccuracy of the clothes detection, use the LaundrySortingBlocks.py as it uses a more accurate model based on colors alone
 
 ## Potential Errors
 

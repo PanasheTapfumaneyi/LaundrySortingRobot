@@ -98,6 +98,10 @@ class RobotArmUI:
 
         # Open the default camera
         self.cap = cv2.VideoCapture(0)
+        
+        self.gesture_thread = threading.Thread(target=self.detect_gesture)
+        self.gesture_thread.daemon = True
+        self.gesture_thread.start()
 
         # Start camera feed and update the thread
         self.video_thread = threading.Thread(target=self.update_camera_feed)
@@ -133,6 +137,9 @@ class RobotArmUI:
         self.detection_thread = threading.Thread(target=self.run_detection_loop)
         self.detection_thread.daemon = True
         self.detection_thread.start()
+        b_time = 1
+        Arm.Arm_Buzzer_On(b_time)
+        time.sleep(1)
 
     # Function to stop the sorting process
     def stop_sorting(self):
@@ -140,6 +147,12 @@ class RobotArmUI:
         self.sorting_active = False
         self.start_button.config(state="normal")
         self.stop_button.config(state="disabled")
+        b_time = 1
+        Arm.Arm_Buzzer_On(b_time)
+        time.sleep(1)
+        b_time = 1
+        Arm.Arm_Buzzer_On(b_time)
+        time.sleep(1)
 
     # Function to set a timer to stop sorting
     def set_timer(self):
@@ -180,6 +193,31 @@ class RobotArmUI:
                 self.handle_detection(label, pickup_pos)
             else:
                 self.status_label.config(text="Status: No valid prediction found.", fg="red")
+
+    #Function to detect hand gestures to initialize program
+    def detect_gesture(self):
+        while self.camera_running:
+            ret, frame = self.cap.read()
+            if not ret:
+                continue
+            frame_path = "gesture_frame.jpg"
+            cv2.imwrite(frame_path, frame)
+
+            # Preprocess image
+            preprocessed_path = frame_path
+
+            # Perform inference using Roboflow for gestures
+            result = CLIENT.infer(preprocessed_path, model_id="hand_detect-xhlhk/2")
+            predictions = result.get("predictions", [])
+
+            if predictions:
+                gesture = predictions[0]["class"]
+
+                if gesture == "hand":
+                    self.status_label.config(text="Status: Program Started", fg="green")
+
+
+            time.sleep(1)
 
     # Function to calculate the position to pick up a block
     def calculate_pickup_position(self, detection, frame_width, frame_height):
