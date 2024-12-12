@@ -46,6 +46,7 @@ This project is a GUI application to sort laundry items based on their color/mat
 3. **User Interface Features**
    - **Video Feed:** Displays the live camera feed.
    - **Status Display:** Shows the current status of the application
+   - **Detecting hand gesture** Place hand in camera frame to initialize the program
    - **Buttons:**
      - **Start:** Begin the object detection and sorting.
      - **Stop:** Stop the sorting process.
