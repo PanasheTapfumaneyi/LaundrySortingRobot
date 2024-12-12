@@ -82,11 +82,11 @@ def arm_move(p, s_time=500):
 
 p_detect = [90, 130, 0, 0, 90]  # Detection position
 
-p_red_bin = [185, 55, 40, 0, 90]  # Red bin position
+p_red_bin = [175, 85, 35, 0, 90]  # Red bin position
 
-p_white_bin = [10, 55, 40, 0, 90]  # White bin position
+p_white_bin = [10, 85, 30, 0, 90]  # White bin position
 
-p_wool_bin = [40, 55, 50, 0, 90]  # Wool bin position
+p_wool_bin = [40, 85, 30, 0, 90]  # Wool bin position
 
 
 
@@ -124,13 +124,17 @@ class RobotArmUI:
 
         
 
-        self.color_counts = {"red":0, "green":0, "yellow":0}
+        self.color_counts = {"red":0, "yellow":0, "green":0, "blue": 0}
 
 
 
         self.camera_running = True
 
         self.cap = cv2.VideoCapture(0)  # Open default camera
+
+        self.cap.set(cv2.CAP_PROP_BRIGHTNESS, 0.1)
+
+        self.cap.set(cv2.CAP_PROP_EXPOSURE, -4)
 
 
 
@@ -360,17 +364,23 @@ class RobotArmUI:
 
             color = "red"
 
+        elif label == "yellow":
+
+            bin_position = p_white_bin
+
+            color = "yellow"
+
         elif label == "green":
 
             bin_position = p_white_bin
 
             color = "green"
 
-        elif label == "yellow":
+        elif label == "blue":
 
             bin_position = p_wool_bin
 
-            color = "yellow"
+            color = "blue"
 
         else:
 
