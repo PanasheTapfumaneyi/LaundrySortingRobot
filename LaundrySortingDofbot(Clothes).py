@@ -84,7 +84,7 @@ class RobotArmUI:
 
 
         #Initializing variables
-        self.color_counts = {"red": 0, "yellow": 0, "green": 0, "blue": 0}
+        self.color_counts = {"colors": 0, "white": 0, "wool": 0}
 
 
         # Start the camera
@@ -166,7 +166,7 @@ class RobotArmUI:
             # Save the current frame and use it to detect the object
             cv2.imwrite("current_frame.jpg", frame) 
             self.status_label.config(text="Status: Detecting with Roboflow...", fg="orange")
-            result = CLIENT.infer("current_frame.jpg", model_id="square_pick/1")
+            result = CLIENT.infer("current_frame.jpg", model_id="laundry-inckb/7")
             predictions = result.get("predictions", [])
 
             # Display prediction results store the position of the detected object
@@ -192,18 +192,21 @@ class RobotArmUI:
 
     # Function to define the bin position that the clothes need to go based on the prediction result
     def handle_detection(self, label, pickup_pos):
-        if label == "red":
+        if label == "color-30":
             bin_position = p_red_bin
-            color = "red"
-        elif label == "yellow":
+            color = "colors"
+        elif label == "color-60":
             bin_position = p_white_bin
-            color = "yellow"
-        elif label == "green":
+            color = "colors"
+        elif label == "white-30":
             bin_position = p_white_bin
-            color = "green"
-        elif label == "blue":
+            color = "white"
+        elif label == "white-60":
             bin_position = p_wool_bin
-            color = "blue"
+            color = "white"
+        elif label == "wool-delicate":
+            bin_position = p_wool_bin
+            color = "wool"
         else:
             self.status_label.config(text="Status: Unknown object detected.", fg="red")
             return
