@@ -7,6 +7,15 @@ from Arm_Lib import Arm_Device
 Arm = Arm_Device()
 time.sleep(.1)
 
+
+# Function to clamp
+def arm_clamp_block(enable):
+    if enable == 0:
+        Arm.Arm_serial_servo_write(6, 60, 400)  # 0 for Release(open)
+    else:
+        Arm.Arm_serial_servo_write(6, 135, 400)  # 1 for Clamp(close)
+    time.sleep(0.5)
+
 def arm_move(p, s_time = 500):
     for i in range(5):
         id = i + 1
@@ -18,7 +27,7 @@ def arm_move(p, s_time = 500):
         time.sleep(.01)
     time.sleep(s_time/1000)
 
-p_arm_position = [90, 80, 10, 0, 90]
+p_arm_position = [90, 130, 0, 0, 90]
 
 
 # Make the DOFBOT move to a position ready to grab
