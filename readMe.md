@@ -45,7 +45,7 @@ This project is a GUI application to sort laundry items based on their color/mat
 
      OR 
 
-          ```bash
+     ```bash
      python LaundrySortingBlocks.py
      ```
 
