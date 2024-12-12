@@ -43,6 +43,12 @@ This project is a GUI application to sort laundry items based on their color/mat
      python LaundrySortingClothes.py
      ```
 
+     OR 
+
+          ```bash
+     python LaundrySortingBlocks.py
+     ```
+
 3. **User Interface Features**
    - **Video Feed:** Displays the live camera feed.
    - **Status Display:** Shows the current status of the application
