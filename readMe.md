@@ -16,8 +16,8 @@ This project is a GUI application to sort laundry items based on their color/mat
 
 1. **Clone or Download the Repository**
    ```bash
-   git clone <https://github.com/PanasheTapfumaneyi/LaundrySortingRobot>
-   cd <LaundrySortingRobot>
+   git clone https://github.com/PanasheTapfumaneyi/LaundrySortingRobot
+   cd LaundrySortingRobot
    ```
 
 2. **Install Required Libraries**
